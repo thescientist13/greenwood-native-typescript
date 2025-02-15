@@ -1,0 +1,20 @@
+{
+  "name": "greenwood-native-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf ./public .greenwood/",
+    "dev": "NODE_OPTIONS='--experimental-strip-types' greenwood develop",
+    "build": "NODE_OPTIONS='--experimental-strip-types' greenwood build",
+    "serve": "NODE_OPTIONS='--experimental-strip-types' greenwood serve",
+    "start": "npm run clean && npm run build && npm run serve",
+    "postinstall": "patch-package"
+  },
+  "devDependencies": {
+    "@greenwood/cli": "~0.31.1",
+    "patch-package": "^8.0.0",
+    "rimraf": "^6.0.1"
+  },
+  "license": "ISC"
+}

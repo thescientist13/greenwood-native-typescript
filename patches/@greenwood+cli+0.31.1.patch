@@ -1,0 +1,35 @@
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/config.js b/node_modules/@greenwood/cli/src/lifecycles/config.js
+index 90cc50e..953efcf 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/config.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/config.js
+@@ -81,7 +81,7 @@ const readAndMergeConfig = async () => {
+   return new Promise(async (resolve, reject) => {
+     try {
+       // deep clone of default config
+-      const configUrl = new URL("./greenwood.config.js", cwd);
++      const configUrl = new URL("./greenwood.config.ts", cwd);
+       let customConfig = Object.assign({}, defaultConfig);
+       let hasConfigFile;
+       let isSPA;
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/graph.js b/node_modules/@greenwood/cli/src/lifecycles/graph.js
+index 2947f25..9e4c787 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/graph.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/graph.js
+@@ -89,7 +89,7 @@ const generateGraph = async (compilation) => {
+             }
+ 
+             const isStatic = isCustom === "static" || extension === ".md" || extension === ".html";
+-            const isDynamic = isCustom === "dynamic" || extension === ".js";
++            const isDynamic = isCustom === "dynamic" || extension === ".js" || extension === '.ts';
+             const isPage = isStatic || isDynamic;
+             let route = `${relativePagePath.replace(".", "").replace(`${extension}`, "")}`;
+             let fileContents;
+@@ -97,7 +97,7 @@ const generateGraph = async (compilation) => {
+             if (isApiRoute) {
+               const extension = filenameUrl.pathname.split(".").pop();
+ 
+-              if (extension !== "js" && !isCustom) {
++              if (extension !== "js" && extension !== "ts"&& !isCustom) {
+                 console.warn(`${filenameUrl} is not a supported API file extension, skipping...`);
+                 return;
+               }
