@@ -105,8 +105,11 @@ template.innerHTML = `
 class Logo extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) {
+      const message: string = "Message from logo component";
+      console.log({ message });
+
       this.attachShadow({ mode: "open" });
-      this.shadowRoot.appendChild(template.content.cloneNode(true));
+      this.shadowRoot?.appendChild(template.content.cloneNode(true));
     }
   }
 }

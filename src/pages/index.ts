@@ -1,4 +1,4 @@
-const html = `
+const html: string = `
 <!doctype html>
 <html lang="en" prefix="og:http://ogp.me/ns#">
   <head>
@@ -67,7 +67,7 @@ const html = `
       }
     </style>
 
-    <script type="module" src="../components/logo/logo.js"></script>
+    <script type="module" src="../components/logo/logo.ts"></script>
   </head>
 
   <body>
