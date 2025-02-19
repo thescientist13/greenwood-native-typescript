@@ -8,6 +8,7 @@ export default {
     port
   },
   port,
+  prerender: true,
   plugins: [
     builtInTypeScriptPlugin(),
     customExternalSourcePlugin()

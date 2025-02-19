@@ -54,7 +54,7 @@ A demonstration repo for using Greenwood with native TypeScript support
       </pre>
     </details>
 1. [x] `tsc` / _tsconfig.json_ example for linting
-1. [ ] prerender
+1. [x] prerender
 
 ### Open Items / Questions
 
