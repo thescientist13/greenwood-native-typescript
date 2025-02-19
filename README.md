@@ -34,14 +34,8 @@ A demonstration repo for using Greenwood with native TypeScript support
 1. [x] API routes
 1. [x] client side / typescript plugin
   - as long as it has `application/javascript` header ?
-1. [ ] prerender
-
-### Open Items / Questions
-
-1. [ ] can we get access to amaro directly?
-1. [ ] if using Amaro, can we opt-out at the custom loaders level?
-1. [ ] Rollup will break on _.ts._ , API routes, etc (assuming no amaro)
-1. [ ] `WARNING: customElement <x-logo> is not defined.  You may not have imported it.` / _logo.js_ is missing from production build(s)
+1. [x] hot reload / live server on _.ts_ content
+1. [ ] `WARNING: customElement <x-logo> is not defined.  You may not have imported it.` / _logo.js_ is missing from production builds
   - i think this is would be a known issue, would have to include the dependency manually?
   - but then doing `import '../components/logo/logo.js';` creates an asset check for the home page and breaks?
     ```sh
@@ -57,10 +51,12 @@ A demonstration repo for using Greenwood with native TypeScript support
   code: 'ERR_MODULE_NOT_FOUND',
   url: 'file:///Users/owenbuckley/Workspace/github/greenwood-native-typescript/public/components/logo/logo.js'x
     ```
+1. [ ] prerender
+
+### Open Items / Questions
+
+1. [ ] can we get access to amaro directly?
+1. [ ] if using Amaro, can we opt-out at the custom loaders level?
+1. [ ] Rollup will break on _.ts._ , API routes, etc (assuming no amaro)
 1. [ ] how will `servePage` know, just accept _.ts_ in pages by default? 
-1. [ ] hot reload / live server on _.ts_ content
-
-### Other runtimes
-
-1. [ ] Bun
-1. [ ] Deno
+1. [ ] Other runtimes, e.g Bun, Deno?
