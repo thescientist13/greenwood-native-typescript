@@ -1,0 +1,31 @@
+name: Main Integration
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [22]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Installing project dependencies
+      run: |
+        npm ci
+    - name: Linting
+      run: |
+        npm run lint
+    - name: Run build
+      run: |
+        npm run build

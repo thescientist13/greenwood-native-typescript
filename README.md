@@ -35,7 +35,7 @@ A demonstration repo for using Greenwood with native TypeScript support
 1. [x] client side / typescript plugin
     - as long as it has `application/javascript` header ?
 1. [x] hot reload / live server on _.ts_ content
-1. [ ] `WARNING: customElement <x-logo> is not defined.  You may not have imported it.` / _logo.js_ is missing from production builds - nm, this is just because `export default` only handles `<body>` content
+1. [x] `WARNING: customElement <x-logo> is not defined.  You may not have imported it.` / _logo.js_ is missing from production builds - nm, this is just because `export default` only handles `<body>` content
     <details>
       - i think this is would be a known issue, would have to include the dependency manually?<br/>
       - but then doing `import '../components/logo/logo.js';` creates an asset check for the home page and breaks?
@@ -53,6 +53,7 @@ A demonstration repo for using Greenwood with native TypeScript support
     url: 'file:///Users/owenbuckley/Workspace/github/greenwood-native-typescript/public/components/logo/logo.js'x
       </pre>
     </details>
+1. [x] `tsc` / _tsconfig.json_ example for linting
 1. [ ] prerender
 
 ### Open Items / Questions
