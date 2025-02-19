@@ -7,10 +7,11 @@ import { ResourceInterface } from "@greenwood/cli/src/lib/resource-interface.js"
 class NativeTsPlugin extends ResourceInterface {
   constructor(compilation) {
     super(compilation);
+    this.extensions = ["ts"];
   }
 
   async shouldServe(url) {
-    return url.pathname.endsWith(".ts");
+    return url.pathname.endsWith(`.${this.extensions[0]}`);
   }
 
   async serve(url) {
