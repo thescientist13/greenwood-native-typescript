@@ -5,16 +5,19 @@ import fs from 'node:fs/promises';
 import { ResourceInterface } from "@greenwood/cli/src/lib/resource-interface.js";
 
 class NativeTsPlugin extends ResourceInterface {
+  #extensions: string[];
+
   constructor(compilation) {
     super(compilation);
-    this.extensions = ["ts"];
+
+    this.#extensions = ["ts"];
   }
 
-  async shouldServe(url) {
-    return url.pathname.endsWith(`.${this.extensions[0]}`);
+  async shouldServe(url: URL): Promise<boolean> {
+    return url.pathname.endsWith(`.${this.#extensions[0]}`);
   }
 
-  async serve(url) {
+  async serve(url: URL): Promise<Response> {
     const contents = await fs.readFile(url, 'utf-8')
     const { code } = amaro.transformSync(contents);
 
