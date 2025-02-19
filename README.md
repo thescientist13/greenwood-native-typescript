@@ -6,7 +6,7 @@ A demonstration repo for using Greenwood with native TypeScript support
 
 1. Clone the repo
 1. Have NodeJS >= `22.6.0` (or run `nvm use`)
-1. Run npm ci
+1. Run `npm ci`
 
 ## Commands
 
