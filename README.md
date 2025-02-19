@@ -30,7 +30,7 @@ A demonstration repo for using Greenwood with native TypeScript support
 > https://www.npmjs.com/package/amaro
 
 1. [x] SSR pages
-  - this will "just work" since we emit SSR chunks as URL assets that will get executed at runtime due to - https://github.com/ProjectEvergreen/greenwood/discussions/1204
+    - this will "just work" since we emit SSR chunks as URL assets that will get executed at runtime due to - https://github.com/ProjectEvergreen/greenwood/discussions/1204
 1. [x] API routes
 1. [x] client side / typescript plugin
     - as long as it has `application/javascript` header ?
