@@ -1,3 +1,16 @@
+diff --git a/node_modules/@greenwood/cli/src/config/rollup.config.js b/node_modules/@greenwood/cli/src/config/rollup.config.js
+index d82b221..2766f2f 100644
+--- a/node_modules/@greenwood/cli/src/config/rollup.config.js
++++ b/node_modules/@greenwood/cli/src/config/rollup.config.js
+@@ -337,7 +337,7 @@ function greenwoodImportMetaUrl(compilation) {
+         const assetContents = await fs.promises.readFile(url);
+         const name = assetName.replace(`.${assetExtension}`, "");
+         const request = new Request(url, { headers: { Accept: "text/javascript" } });
+-        let bundleExtensions = ["js"];
++        let bundleExtensions = ["js", "ts"];
+ 
+         for (const plugin of customResourcePlugins) {
+           if (plugin.shouldServe && (await plugin.shouldServe(url, request))) {
 diff --git a/node_modules/@greenwood/cli/src/lifecycles/config.js b/node_modules/@greenwood/cli/src/lifecycles/config.js
 index 90cc50e..953efcf 100644
 --- a/node_modules/@greenwood/cli/src/lifecycles/config.js
