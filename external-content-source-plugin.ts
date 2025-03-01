@@ -1,10 +1,10 @@
-import type { SourcePlugin } from '@greenwood/cli';
+import type { SourcePlugin, SourcePage } from '@greenwood/cli';
 
 export const customExternalSourcePlugin = (): SourcePlugin => {
   return {
     type: "source",
     name: "source-plugin-external-page",
-    provider: () => {
+    provider: (): () => Promise<SourcePage[]> => {
       return async function () {
         return [{
           id: "my-external-page",

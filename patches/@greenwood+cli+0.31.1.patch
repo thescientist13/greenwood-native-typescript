@@ -161,10 +161,10 @@ index 0000000..b60083e
 +export type Graph = Page[];
 diff --git a/node_modules/@greenwood/cli/src/types/index.d.ts b/node_modules/@greenwood/cli/src/types/index.d.ts
 new file mode 100644
-index 0000000..fa23dcc
+index 0000000..4de164d
 --- /dev/null
 +++ b/node_modules/@greenwood/cli/src/types/index.d.ts
-@@ -0,0 +1,41 @@
+@@ -0,0 +1,47 @@
 +import type { Config } from "./config.d.ts";
 +import type { Page, Collection, Graph } from "./content.d.ts";
 +import type { Compilation, Frontmatter } from "./compilation.d.ts";
@@ -181,6 +181,9 @@ index 0000000..fa23dcc
 +  RollupPlugin,
 +  ServerPlugin,
 +  SourcePlugin,
++  Resource,
++  SourcePage,
++  Server
 +} from "./plugins.d.ts";
 +
 +export type {
@@ -192,6 +195,9 @@ index 0000000..fa23dcc
 +  Frontmatter,
 +  SERVE_PAGE_OPTIONS,
 +  Plugin,
++  Resource,
++  SourcePage,
++  Server,
 +  AdapterPlugin,
 +  ContextPlugin,
 +  CopyPlugin,
@@ -209,7 +215,7 @@ index 0000000..fa23dcc
 \ No newline at end of file
 diff --git a/node_modules/@greenwood/cli/src/types/plugins.d.ts b/node_modules/@greenwood/cli/src/types/plugins.d.ts
 new file mode 100644
-index 0000000..48c9f0b
+index 0000000..ddd6e6b
 --- /dev/null
 +++ b/node_modules/@greenwood/cli/src/types/plugins.d.ts
 @@ -0,0 +1,102 @@
@@ -267,7 +273,7 @@ index 0000000..48c9f0b
 +// https://greenwoodjs.dev/docs/reference/plugins-api/#resource
 +export type SERVE_PAGE_OPTIONS = "static" | "dynamic";
 +
-+type Resource = {
++export type Resource = {
 +  extensions?: string[];
 +  servePage?: SERVE_PAGE_OPTIONS;
 +  shouldResolve?: (url: URL) => Promise<boolean>;
@@ -293,7 +299,7 @@ index 0000000..48c9f0b
 +}
 +
 +// https://greenwoodjs.dev/docs/reference/plugins-api/#server
-+type Server = {
++export type Server = {
 +  start: () => Promise<any>;
 +  stop?: () => Promise<any>;
 +};
@@ -303,7 +309,7 @@ index 0000000..48c9f0b
 +}
 +
 +// https://greenwoodjs.dev/docs/reference/plugins-api/#source
-+type SourcePage = {
++export type SourcePage = {
 +  id: string;
 +  body: string;
 +  title: string;

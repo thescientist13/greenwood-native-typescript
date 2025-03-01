@@ -1,15 +1,14 @@
 // https://satanacchio.hashnode.dev/everything-you-need-to-know-about-nodejs-type-stripping#heading-type-stripping
 import amaro from "amaro";
 import fs from 'node:fs/promises';
+import type { Compilation, ResourcePlugin, Resource } from "@greenwood/cli";
 
-import { ResourceInterface } from "@greenwood/cli/src/lib/resource-interface.js";
-
-class NativeTsPlugin extends ResourceInterface {
+class NativeTsPlugin {
+  #compilation: Compilation;
   #extensions: string[];
 
-  constructor(compilation) {
-    super(compilation);
-
+  constructor(compilation: Compilation) {
+    this.#compilation = compilation;
     this.#extensions = ["ts"];
   }
 
@@ -29,10 +28,10 @@ class NativeTsPlugin extends ResourceInterface {
   }
 }
 
-export const builtInTypeScriptPlugin = () => {
+export const builtInTypeScriptPlugin = (): ResourcePlugin => {
   return {
     type: "resource",
     name: "native-ts-plugin",
-    provider: (compilation) => new NativeTsPlugin(compilation)
+    provider: (compilation): Resource => new NativeTsPlugin(compilation)
   }
 }
