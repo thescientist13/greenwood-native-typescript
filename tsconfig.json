@@ -1,14 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "module": "nodenext",
+    "moduleResolution": "nodenext",
     "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true,
-    "verbatimModuleSyntax": true,
-    "checkJs": true,
-    "allowJs": true,
     "noEmit": true,
-    "skipLibCheck": true,
+    "allowJs": true
   },
   "exclude": [
     "./public/",
