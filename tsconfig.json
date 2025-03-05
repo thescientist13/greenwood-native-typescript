@@ -4,8 +4,8 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "allowJs": true
+    "erasableSyntaxOnly": true,
+    "noEmit": true
   },
   "exclude": [
     "./public/",
