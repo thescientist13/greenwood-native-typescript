@@ -3,7 +3,7 @@ import type { Config } from '@greenwood/cli';
 import { customExternalSourcePlugin } from "./external-content-source-plugin.ts";
 import { builtInTypeScriptPlugin } from "./built-in-typescript-plugin.ts";
 import { greenwoodPluginAdapterVercel } from '@greenwood/plugin-adapter-vercel';
-// import { greenwoodPluginCssModules } from '@greenwood/plugin-css-modules';
+import { greenwoodPluginCssModules } from '@greenwood/plugin-css-modules';
 import { greenwoodPluginImportRaw } from '@greenwood/plugin-import-raw';
 
 const port: number = 8181;
@@ -19,7 +19,7 @@ const config: Config = {
   prerender: true,
   plugins: [
     greenwoodPluginAdapterVercel(options),
-    // greenwoodPluginCssModules(),
+    greenwoodPluginCssModules(),
     greenwoodPluginImportRaw(),
     builtInTypeScriptPlugin(),
     customExternalSourcePlugin()

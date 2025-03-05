@@ -1,5 +1,11 @@
 import type { SourcePlugin, SourcePage } from '@greenwood/cli';
 
+const body: string = `
+<main>
+  <h1>My custom external page</h1>
+</main>
+`;
+
 export const customExternalSourcePlugin = (): SourcePlugin => {
   return {
     type: "source",
@@ -9,7 +15,7 @@ export const customExternalSourcePlugin = (): SourcePlugin => {
         return [{
           id: "my-external-page",
           title: 'My custom external page',
-          body: '<h1>My custom external page</h1>',
+          body,
           route: '/external/',
           label: 'External',
           data: []

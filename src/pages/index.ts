@@ -9,8 +9,6 @@ const html: string = `
 
     <h1>Edit <code>src/pages/index.html</code> to start making changes</h1>
 
-    <a href="/external/" style="color:black">External Source Page</a>
-
     <div class="card-wrapper">
       <div class="card">
         <h2>Getting Started</h2>
