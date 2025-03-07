@@ -15,6 +15,7 @@ const config: Config = {
   devServer: {
     port
   },
+  // useTsc: true,
   port,
   prerender: true,
   plugins: [

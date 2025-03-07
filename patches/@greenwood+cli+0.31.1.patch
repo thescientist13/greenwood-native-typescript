@@ -28,10 +28,18 @@ index d82b221..2766f2f 100644
          for (const plugin of customResourcePlugins) {
            if (plugin.shouldServe && (await plugin.shouldServe(url, request))) {
 diff --git a/node_modules/@greenwood/cli/src/lifecycles/config.js b/node_modules/@greenwood/cli/src/lifecycles/config.js
-index 90cc50e..953efcf 100644
+index 90cc50e..f96fcad 100644
 --- a/node_modules/@greenwood/cli/src/lifecycles/config.js
 +++ b/node_modules/@greenwood/cli/src/lifecycles/config.js
-@@ -81,7 +81,7 @@ const readAndMergeConfig = async () => {
+@@ -74,6 +74,7 @@ const defaultConfig = {
+     importAttributes: null, // or ['css', 'json']
+     importMaps: false,
+   },
++  useTsc: false
+ };
+ 
+ const readAndMergeConfig = async () => {
+@@ -81,7 +82,7 @@ const readAndMergeConfig = async () => {
    return new Promise(async (resolve, reject) => {
      try {
        // deep clone of default config
@@ -40,6 +48,31 @@ index 90cc50e..953efcf 100644
        let customConfig = Object.assign({}, defaultConfig);
        let hasConfigFile;
        let isSPA;
+@@ -113,6 +114,7 @@ const readAndMergeConfig = async () => {
+           activeContent,
+           isolation,
+           polyfills,
++          useTsc
+         } = userCfgFile;
+ 
+         // workspace validation
+@@ -331,6 +333,16 @@ const readAndMergeConfig = async () => {
+             }
+           }
+         }
++
++        if (useTsc !== undefined) {
++          if (typeof useTsc === "boolean") {
++            customConfig.useTsc = useTsc;
++          } else {
++            reject(
++              `Configuration error: useTsc must be a boolean; true or false.  Passed value was typeof: ${typeof useTsc}`,
++            );
++          }
++        }
+       } else {
+         // SPA should _not_ prerender unless if user has specified prerender should be true
+         if (isSPA) {
 diff --git a/node_modules/@greenwood/cli/src/lifecycles/graph.js b/node_modules/@greenwood/cli/src/lifecycles/graph.js
 index 2947f25..9e4c787 100644
 --- a/node_modules/@greenwood/cli/src/lifecycles/graph.js
@@ -108,10 +141,10 @@ index 0000000..754ffdd
 +};
 diff --git a/node_modules/@greenwood/cli/src/types/config.d.ts b/node_modules/@greenwood/cli/src/types/config.d.ts
 new file mode 100644
-index 0000000..1f931ae
+index 0000000..94b2d93
 --- /dev/null
 +++ b/node_modules/@greenwood/cli/src/types/config.d.ts
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,30 @@
 +import type { PLUGINS } from "./plugins.d.ts";
 +
 +// https://greenwoodjs.dev/docs/reference/configuration/
@@ -140,6 +173,7 @@ index 0000000..1f931ae
 +  prerender?: boolean;
 +  staticRouter?: boolean;
 +  workspace?: URL | string;
++  useTsc?: boolean;
 +};
 diff --git a/node_modules/@greenwood/cli/src/types/content.d.ts b/node_modules/@greenwood/cli/src/types/content.d.ts
 new file mode 100644
