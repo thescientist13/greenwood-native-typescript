@@ -54,6 +54,7 @@ class NativeTsPlugin {
       const compilerOptions = await getCompilerOptions(this.compilation.context.projectDirectory);
       const tsc = (await import("typescript").then((mod) => mod)).default;
 
+      // @ts-expect-error
       code = tsc.transpileModule(body, { compilerOptions }).outputText;
     } else {
       code = amaro.transformSync(body).code;
