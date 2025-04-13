@@ -18,7 +18,6 @@ export const customExternalSourcePlugin = (): SourcePlugin => {
           body,
           route: '/external/',
           label: 'External',
-          data: {}
         }];
       }
     },
