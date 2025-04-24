@@ -18,5 +18,8 @@
     "@greenwood/plugin-import-raw": "^0.32.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.0"
+  },
+  "dependencies": {
+    "typed-custom-elements": "^0.0.1"
   }
 }
