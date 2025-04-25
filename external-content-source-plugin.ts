@@ -16,6 +16,8 @@ export const customExternalSourcePlugin = (): SourcePlugin => {
     type: "source",
     name: "source-plugin-external-page",
     provider: (): () => Promise<ExternalSourcePage[]> => {
+      console.log('Running provider function of my source plugin!')
+
       return async function () {
         const unifiedPageMarkdown = await fs.readFile(new URL('./unified.md', import.meta.url), 'utf-8');
         const unifiedPageHtml = await unified()
