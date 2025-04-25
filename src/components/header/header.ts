@@ -11,6 +11,9 @@ export default class Header extends HTMLElement {
           <li class="${styles.navBarMenuItem}">
             <a href="/external/" title="External">External</a>
           </li>
+          <li class="${styles.navBarMenuItem}">
+            <a href="/unified/" title="Unified">Unified</a>
+          </li>
         </ul>
       </header>
     `;
