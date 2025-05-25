@@ -4,10 +4,10 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "NODE_OPTIONS='--import @greenwood/cli/register' greenwood develop",
-    "build": "NODE_OPTIONS='--import @greenwood/cli/register' greenwood build",
-    "serve": "NODE_OPTIONS='--import @greenwood/cli/register' greenwood serve",
-    "start": "npm run clean && npm run build && npm run serve",
+    "dev": "NODE_OPTIONS='--experimental-strip-types --import @greenwood/cli/register' greenwood develop",
+    "build": "NODE_OPTIONS='--experimental-strip-types --import @greenwood/cli/register' greenwood build",
+    "serve": "NODE_OPTIONS='--experimental-strip-types --import @greenwood/cli/register' greenwood serve",
+    "start": "npm run build && npm run serve",
     "lint": "tsc --project tsconfig.json"
   },
   "devDependencies": {
