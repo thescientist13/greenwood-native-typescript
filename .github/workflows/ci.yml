@@ -1,9 +1,6 @@
-name: Main Integration
+name: Continuous Integration
 
-on:
-  push:
-    branches:
-      - master
+on: [pull_request]
 
 jobs:
 
@@ -12,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [22]
+        node: [24]
 
     steps:
     - uses: actions/checkout@v4
