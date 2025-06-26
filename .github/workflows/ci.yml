@@ -1,4 +1,4 @@
-name: Main Integration
+name: Continuous Integration
 
 on: [pull_request]
 
