@@ -11,10 +11,10 @@
     "lint": "tsc --project tsconfig.json"
   },
   "devDependencies": {
-    "@greenwood/cli": "^0.33.0-alpha.0",
-    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.0",
-    "@greenwood/plugin-css-modules": "^0.33.0-alpha.0",
-    "@greenwood/plugin-import-raw": "^0.33.0-alpha.0",
+    "@greenwood/cli": "^0.33.0-alpha.2",
+    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.2",
+    "@greenwood/plugin-css-modules": "^0.33.0-alpha.2",
+    "@greenwood/plugin-import-raw": "^0.33.0-alpha.2",
     "typescript": "^5.8.0"
   }
 }

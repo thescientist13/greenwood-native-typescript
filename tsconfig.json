@@ -4,8 +4,9 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
-    "verbatimModuleSyntax": false,
-    "noEmit": true
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "noImplicitAny": true
   },
   "exclude": [
     "./public/",
