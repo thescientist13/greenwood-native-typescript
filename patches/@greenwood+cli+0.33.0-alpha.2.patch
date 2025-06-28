@@ -1,0 +1,65 @@
+diff --git a/node_modules/@greenwood/cli/src/lib/layout-utils.js b/node_modules/@greenwood/cli/src/lib/layout-utils.js
+index 15ee561..b432b87 100644
+--- a/node_modules/@greenwood/cli/src/lib/layout-utils.js
++++ b/node_modules/@greenwood/cli/src/lib/layout-utils.js
+@@ -221,7 +221,7 @@ async function mergeContentIntoLayout(
+       outletType === "content"
+         ? /<content-outlet><\/content-outlet>/
+         : /<page-outlet><\/page-outlet>/;
+-    const finalBody =
++    let finalBody =
+       parentBody && parentBody.match(outletRegex)
+         ? parentBody.replace(outletRegex, childBody ?? childContents)
+         : childRoot.querySelector("html") && childBody
+@@ -230,6 +230,10 @@ async function mergeContentIntoLayout(
+             ? childContents
+             : "";
+ 
++    if(matchingRoute.isSSR && outletType === "content") {
++      finalBody = `<!-- greenwood-ssr-start -->${finalBody}<!-- greenwood-ssr-end -->`;
++    }
++
+     mergedContents = `<!DOCTYPE html>
+       ${mergedHtml}
+         <head>
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/prerender.js b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+index 11d8594..0de9084 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/prerender.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+@@ -91,6 +91,7 @@ async function preRenderCompilationWorker(compilation, workerPrerender) {
+     let body = await (await servePage(url, request, plugins)).text();
+     body = await (await interceptPage(url, request, plugins, body)).text();
+ 
++    console.log({ page, body });
+     // hack to avoid over-rendering SSR content
+     // https://github.com/ProjectEvergreen/greenwood/issues/1044
+     // https://github.com/ProjectEvergreen/greenwood/issues/988#issuecomment-1288168858
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+index 7599fd7..52a8252 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+@@ -162,8 +162,15 @@ class StandardHtmlResource {
+     } else if (matchingRoute.external) {
+       body = matchingRoute.body;
+     } else if (ssrBody) {
++      console.log('ssrBody 111????', { matchingRoute, ssrBody })
++      body = ssrBody.replace(/\$/g, "$$$");
++      // body = ssrBody.trim().startsWith('<html>')
++      //   ? ssrBody
++      //   : `<!-- greenwood-ssr-start -->${ssrBody.replace(/\$/g, "$$$")}<!-- greenwood-ssr-end -->`
++        // : ssrBody 
+       // we wrap SSR content in comments so we can extract it during prerendering to avoid double pre-rendering
+-      body = `<!-- greenwood-ssr-start -->${ssrBody.replace(/\$/g, "$$$")}<!-- greenwood-ssr-end -->`;
++      // body = `<!-- greenwood-ssr-start -->${ssrBody.replace(/\$/g, "$$$")}<!-- greenwood-ssr-end -->`;
++      // console.log('ssrBody 222????', { body })
+     }
+ 
+     if (isSpaRoute) {
+@@ -185,6 +192,7 @@ class StandardHtmlResource {
+       html = mergedAppLayoutContents;
+     }
+ 
++    console.log({ html });
+     html = await getGreenwoodScripts(html, this.compilation);
+ 
+     // clean up any empty placeholder content-outlet
