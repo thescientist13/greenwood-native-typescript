@@ -13,7 +13,7 @@ template.innerHTML = `
   </div>
 `;
 
-class Logo extends HTMLElement {
+export default class Logo extends HTMLElement {
   connectedCallback() {
     if (!this.shadowRoot) {
       const message: string = "Message from logo component";

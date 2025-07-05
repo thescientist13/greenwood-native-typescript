@@ -12,10 +12,10 @@
     "postinstall": "patch-package"
   },
   "devDependencies": {
-    "@greenwood/cli": "^0.33.0-alpha.2",
-    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.2",
-    "@greenwood/plugin-css-modules": "^0.33.0-alpha.2",
-    "@greenwood/plugin-import-raw": "^0.33.0-alpha.2",
+    "@greenwood/cli": "^0.33.0-alpha.3",
+    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.3",
+    "@greenwood/plugin-css-modules": "^0.33.0-alpha.3",
+    "@greenwood/plugin-import-raw": "^0.33.0-alpha.3",
     "patch-package": "^8.0.0",
     "typescript": "^5.8.0"
   }
