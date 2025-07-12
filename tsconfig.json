@@ -6,8 +6,7 @@
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": false,
-    "noEmit": true,
-    "noImplicitAny": true
+    "noEmit": true
   },
   "exclude": [
     "./public/",
