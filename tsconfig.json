@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "target": "es2020",
     "module": "preserve",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": false,
-    "noEmit": true
+    "noEmit": true,
+    "noImplicitAny": true
   },
   "exclude": [
     "./public/",
