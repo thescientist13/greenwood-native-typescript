@@ -8,13 +8,13 @@
     "build": "NODE_OPTIONS='--import @greenwood/cli/register' greenwood build",
     "serve": "NODE_OPTIONS='--import @greenwood/cli/register' greenwood serve",
     "start": "npm run build && npm run serve",
-    "lint": "tsc --project tsconfig.json"
+    "lint": "tsc"
   },
   "devDependencies": {
-    "@greenwood/cli": "^0.33.0-alpha.4",
-    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.4",
-    "@greenwood/plugin-css-modules": "^0.33.0-alpha.4",
-    "@greenwood/plugin-import-raw": "^0.33.0-alpha.4",
+    "@greenwood/cli": "^0.33.0-alpha.5",
+    "@greenwood/plugin-adapter-vercel": "^0.33.0-alpha.5",
+    "@greenwood/plugin-css-modules": "^0.33.0-alpha.5",
+    "@greenwood/plugin-import-raw": "^0.33.0-alpha.5",
     "typescript": "^5.8.0"
   }
 }
