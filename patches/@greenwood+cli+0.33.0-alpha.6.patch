@@ -1,0 +1,106 @@
+diff --git a/node_modules/@greenwood/cli/src/lib/layout-utils.js b/node_modules/@greenwood/cli/src/lib/layout-utils.js
+index 95f0e8e..1edbb5d 100644
+--- a/node_modules/@greenwood/cli/src/lib/layout-utils.js
++++ b/node_modules/@greenwood/cli/src/lib/layout-utils.js
+@@ -52,6 +52,7 @@ async function mergeContentIntoLayout(
+   const childRoot = parse(childContents, { comment: true });
+   let mergedContents = "";
+ 
++  console.log({ parentContents, childContents });
+   if ((parentContents && !valid(parentContents)) || (childContents && !valid(childContents))) {
+     console.error(`ERROR: Invalid HTML detected for route => ${matchingRoute.route}`);
+     const enableHud = compilation.config.devServer.hud;
+@@ -104,6 +105,7 @@ async function mergeContentIntoLayout(
+         return plugin.provider(compilation);
+       });
+     let title;
++    console.log({ parentBody, childBody });
+ 
+     if (hasActiveFrontmatterTitle) {
+       const text =
+@@ -219,7 +221,7 @@ async function mergeContentIntoLayout(
+     // then we _do not_ favor the child contents in that case
+     // this can happen in the case of context plugins in which pages may _only_ be used for loading a layout
+     // https://github.com/ProjectEvergreen/greenwood/pull/1527
+-    const finalBody =
++    let finalBody =
+       parentBody && parentBody.match(outletRegex)
+         ? parentBody.replace(outletRegex, childBody ?? childContents)
+         : parentContents && parentContents.match(outletRegex) && outletType === "content"
+@@ -232,6 +234,11 @@ async function mergeContentIntoLayout(
+                 ? childContents
+                 : "";
+ 
++    if (matchingRoute.isSSR && outletType === "content") {
++      console.log('DO IT IT IT')
++      finalBody = `<!-- greenwood-ssr-start -->${finalBody}<!-- greenwood-ssr-end -->`
++    }
++
+     mergedContents = `<!DOCTYPE html>
+       ${mergedHtml}
+         <head>
+diff --git a/node_modules/@greenwood/cli/src/lifecycles/prerender.js b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+index e3f29b7..7d64dbd 100644
+--- a/node_modules/@greenwood/cli/src/lifecycles/prerender.js
++++ b/node_modules/@greenwood/cli/src/lifecycles/prerender.js
+@@ -97,6 +97,7 @@ async function preRenderCompilationWorker(compilation, workerPrerender) {
+     // https://github.com/ProjectEvergreen/greenwood/issues/1044
+     // https://github.com/ProjectEvergreen/greenwood/issues/988#issuecomment-1288168858
+     if (page.isSSR) {
++      console.log('prerender', { body });
+       const ssrContentsMatch = /<!-- greenwood-ssr-start -->(.*.)<!-- greenwood-ssr-end -->/s;
+       const match = body.match(ssrContentsMatch);
+ 
+@@ -110,6 +111,8 @@ async function preRenderCompilationWorker(compilation, workerPrerender) {
+       }
+     }
+ 
++    console.log('@@@@@@', { body });
++
+     const resources = await trackResourcesForRoute(body, compilation, route);
+     const scripts = resources
+       .filter((resource) => resource.type === "script")
+@@ -136,10 +139,13 @@ async function preRenderCompilationWorker(compilation, workerPrerender) {
+       );
+     });
+ 
++    console.log('#######', {body});
++
+     if (page.isSSR) {
+       body = body.replace("<!-- greenwood-ssr-start --><!-- greenwood-ssr-end -->", ssrContents);
+     }
+ 
++    console.log('???????', {body});
+     await createOutputDirectory(new URL(scratchUrl.href.replace("index.html", "")));
+     await fs.writeFile(scratchUrl, body);
+ 
+diff --git a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+index ca61550..3f1e6ed 100644
+--- a/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
++++ b/node_modules/@greenwood/cli/src/plugins/resource/plugin-standard-html.js
+@@ -155,13 +155,16 @@ class StandardHtmlResource {
+       // we wrap SSR content in comments so we can extract it during prerendering to avoid double pre-rendering
+       // https://github.com/ProjectEvergreen/greenwood/issues/1044
+       // https://github.com/ProjectEvergreen/greenwood/issues/988#issuecomment-1288168858
+-      body = `<!-- greenwood-ssr-start -->${ssrBody.replace(/\$/g, "$$$")}<!-- greenwood-ssr-end -->`;
++      // body = `<!-- greenwood-ssr-start -->${ssrBody.replace(/\$/g, "$$$")}<!-- greenwood-ssr-end -->`;
++      body = ssrBody;
+     }
+ 
+     if (isSpaRoute) {
+       html = await fs.readFile(new URL(isSpaRoute.pageHref), "utf-8");
+     } else {
++      console.log({ body });
+       const mergedPageLayoutContents = await getPageLayout(body, this.compilation, matchingRoute);
++      console.log({ mergedPageLayoutContents })
+       const mergedAppLayoutContents = await getAppLayout(
+         mergedPageLayoutContents,
+         this.compilation,
+@@ -169,6 +172,7 @@ class StandardHtmlResource {
+       );
+ 
+       html = mergedAppLayoutContents;
++      console.log({ html });
+     }
+ 
+     html = await getGreenwoodScripts(html, this.compilation);
