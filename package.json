@@ -15,6 +15,6 @@
     "@greenwood/plugin-adapter-vercel": "^0.33.1",
     "@greenwood/plugin-css-modules": "^0.33.1",
     "@greenwood/plugin-import-raw": "^0.33.1",
-    "typescript": "^5.8.0"
+    "typescript": "^6.0.0-beta"
   }
 }

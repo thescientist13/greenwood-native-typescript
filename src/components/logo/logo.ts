@@ -13,13 +13,15 @@ template.innerHTML = `
   </div>
 `;
 
-export default class Logo extends HTMLElement {
+export default class Logo extends HTMLElement {  
+  shadowRoot: ShadowRoot | null = this.shadowRoot;
+  
   connectedCallback() {
     if (!this.shadowRoot) {
       const message: string = "Message from logo component";
       console.log({ message });
 
-      this.attachShadow({ mode: "open" });
+      this.shadowRoot = this.attachShadow({ mode: "open" });
       this.shadowRoot?.appendChild(template.content.cloneNode(true));
     }
 
