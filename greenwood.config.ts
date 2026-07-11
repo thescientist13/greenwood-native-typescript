@@ -7,7 +7,7 @@ import { customExternalSourcePlugin } from "./external-content-source-plugin.ts"
 
 const port: number = 8181;
 const options: VercelAdapterOptions = {
-  runtime: "nodejs18.x"
+  runtime: "nodejs24.x"
 };
 
 const config: Config = {
