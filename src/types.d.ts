@@ -6,8 +6,8 @@ declare module "*?type=raw" {
 
 // Greenwood CSS Modules plugin
 declare module "*.module.css" {
-  const classes: { [key: string]: string };
-  export default classes;
+  const styles: Readonly<Record<string, string>>;
+  export default styles;
 }
 
 // CSS Import Attribute
